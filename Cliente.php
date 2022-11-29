@@ -65,11 +65,11 @@ class Cliente{
     public function tieneAlquilado($s): bool{
         $existe=false;
         foreach ($this->soportesAlquilados as $valor) {
-          if ($valor->getNumero()==$s->getNumero()){
-              $existe=true;
-          }
+            if ($valor->getNumero()==$s->getNumero()){
+                $existe=true;
+            }
         }
-    return $existe;
+        return $existe;
     }
 
 
@@ -93,6 +93,55 @@ class Cliente{
         }
         echo "<br />El soporte lo a alquilado: ".$this->nombre. "<br>". $s-> muestraResumen();
     }
+
+    public function devolver( int $numSoporte) {
+        $existe=false;
+        if($this->getNumSoportesAlquilados()==0)
+        {
+            echo "Este cliente no tiene ningun soporte <br>";
+            return $existe;
+        }
+
+        for($i=0;$i<$this->maxAlquilerConcurrente;$i++) {
+            if(!is_null($this->soportesAlquilados[$i]))
+            {
+                if($this->soportesAlquilados[$i]->getNumero()==$numSoporte)
+                {
+                    echo "<br />El soporte ha sido devuelto por ".$this->nombre;
+
+                    $this->soportesAlquilados[$i]=null;
+                    $this->numSoportesAlquilados--;
+                    $existe=true;
+                    return $existe;
+                }
+            }
+        }
+
+        echo "<br />El soporte no existe";
+
+        return $existe;
+
+    }
+
+
+    public function listarAlquileres(){
+        if($this->getNumSoportesAlquilados()==0)
+            echo "Este cliente no tiene ningun soporte alquilado". "<br>";
+
+        else{
+            echo "<br />Alquileres de: ".$this->nombre."<br>";
+
+            for($i=0;$i<$this->maxAlquilerConcurrente;$i++){
+                if(!is_null($this->soportesAlquilados[$i])){
+
+                    echo $this->soportesAlquilados[$i]->muestraResumen();
+                }
+            }
+        }
+
+    }
+
+
 }
 
 ?>
