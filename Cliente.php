@@ -4,8 +4,8 @@ class Cliente{
 
     public $nombre;
     private $numero;
-    private $soportesAlquilados;
-    private $numSoportesAlquilados ;
+    private $soportesAlquilados=array();
+    private $numSoportesAlquilados;
     private $maxAlquilerConcurrente;
 
     /**
@@ -51,17 +51,48 @@ class Cliente{
     {
         $contador=0;
         for($i=0;$i<$this->maxAlquilerConcurrente;$i++){
-                    if(!is_null($this->soportesAlquilados[$i])){
+            if(!is_null($this->soportesAlquilados[$i])){
                 $contador++;
             }
         }
-        echo "El numero de soportes alquilados es: ". $contador;
+        return $contador;
     }
 
     public function muestraResumen(){
-        echo "Cliente: ". $this->nombre  .  "<br>Cantidad de alquileres: ".$this->getNumSoportesAlquilados();
+        echo $this->nombre . "<br>Cantidad de alquileres: ".count($this->soportesAlquilados);
     }
 
+    public function tieneAlquilado($s): bool{
+        $existe=false;
+        foreach ($this->soportesAlquilados as $valor) {
+          if ($valor->getNumero()==$s->getNumero()){
+              $existe=true;
+          }
+        }
+    return $existe;
+    }
+
+
+
+    public function alquilar( $s){
+        if ($this->tieneAlquilado($s)){
+            echo "El soporte ya está alquilado";
+        }
+        elseif ($this->getNumSoportesAlquilados()==$this->maxAlquilerConcurrente){
+            echo "Ha superado el cupo de alquileres";
+        }
+        else {
+            $contador=0;
+            while(!is_null($this->soportesAlquilados[$contador])) {
+                $contador++;  }
+
+            $this->soportesAlquilados[$contador]=$s;
+
+            $this->numSoportesAlquilados++;
+
+        }
+        echo "<br />El soporte lo a alquilado: ".$this->nombre. "<br>". $s-> muestraResumen();
+    }
 }
 
 ?>
