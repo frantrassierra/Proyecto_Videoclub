@@ -1,6 +1,6 @@
 <?php
 
-abstract class Soporte{
+abstract class Soporte implements Resumible {
     public  $titulo;
     protected  $numero;
     private  $precio;
