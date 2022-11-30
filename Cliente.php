@@ -62,17 +62,22 @@ class Cliente{
         echo $this->nombre . "<br>Cantidad de alquileres: ".count($this->soportesAlquilados);
     }
 
+
+
     public function tieneAlquilado($s): bool{
         $existe=false;
-        foreach ($this->soportesAlquilados as $valor) {
-            if ($valor->getNumero()==$s->getNumero()){
-                $existe=true;
+
+        for ($i=0;$i<$this->maxAlquilerConcurrente;$i++){
+
+            if (!is_null($this->soportesAlquilados[$i])){
+                if ($this->soportesAlquilados[$i]->getNumero()== $s->getNumero()){
+                    $existe= true;
+                }
             }
         }
+
         return $existe;
     }
-
-
 
     public function alquilar( $s){
         if ($this->tieneAlquilado($s)){
@@ -124,9 +129,9 @@ class Cliente{
     }
 
 
-    public function listarAlquileres(){
+    public function listaAlquileres(){
         if($this->getNumSoportesAlquilados()==0)
-            echo "Este cliente no tiene ningun soporte alquilado". "<br>";
+            echo "<br> Este cliente no tiene ningun soporte alquilado". "<br>";
 
         else{
             echo "<br />Alquileres de: ".$this->nombre."<br>";
@@ -134,7 +139,7 @@ class Cliente{
             for($i=0;$i<$this->maxAlquilerConcurrente;$i++){
                 if(!is_null($this->soportesAlquilados[$i])){
 
-                    echo $this->soportesAlquilados[$i]->muestraResumen();
+                    echo $this->soportesAlquilados[$i]->muestraResumen() . "<br>";
                 }
             }
         }
@@ -145,3 +150,4 @@ class Cliente{
 }
 
 ?>
+
