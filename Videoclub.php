@@ -33,7 +33,7 @@ class videoclub{
         $this->productos[$this->numProductos]=$p;
         $this->numProductos++;
 
-        echo "Se ha añadido correctamente el producto";
+        echo "Se ha añadido correctamente el producto " . $this->numProductos ." <br>";
 
     }
 
@@ -42,7 +42,7 @@ class videoclub{
 
         $this->socios[$this->numSocios]=$socioNuevo;
         $this->numSocios++;
-        echo "Se ha añadido correctamente el socio";
+        echo "<br> Se ha añadido correctamente el socio" . $this->numSocios . "<br>";
 
     }
 
@@ -84,16 +84,14 @@ class videoclub{
     public function listarSocios()  {
 
         for($i=0;$i<count($this->socios);$i++) {
-
             if(!is_null($this->socios[$i]))
                 $this->socios[$i]->muestraResumen();
-
         }
     }
 
 
 
-    function alquilarSocioProducto($numeroCliente,$numeroSoporte){
+    function alquilaSocioProducto($numeroCliente,$numeroSoporte){
         if (is_null($this->socios[$numeroCliente])){
             echo "No se ha encontrado el cliente";
 
