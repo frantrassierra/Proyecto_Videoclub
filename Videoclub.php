@@ -100,6 +100,8 @@ class videoclub{
         }else{
             $this->socios[$numeroCliente]-> alquilar($this->productos[$numeroSoporte]);
         }
+        return $this;
+
     }
 
 

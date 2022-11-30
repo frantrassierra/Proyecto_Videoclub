@@ -97,6 +97,7 @@ class Cliente{
 
         }
         echo "<br />El soporte lo a alquilado: ".$this->nombre. "<br>". $s-> muestraResumen();
+        return $this;
     }
 
     public function devolver( int $numSoporte) {
@@ -105,6 +106,7 @@ class Cliente{
         {
             echo "Este cliente no tiene ningun soporte <br>";
             return $existe;
+
         }
 
         for($i=0;$i<$this->maxAlquilerConcurrente;$i++) {
@@ -124,7 +126,7 @@ class Cliente{
 
         echo "<br />El soporte no existe";
 
-        return $existe;
+        return $this;
 
     }
 
@@ -150,4 +152,3 @@ class Cliente{
 }
 
 ?>
-

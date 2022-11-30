@@ -1,4 +1,5 @@
 <?php
+include_once "Soporte.php";
 include_once "CintaVideo.php";
 include_once "Dvd.php";
 include_once "Juego.php";
@@ -19,7 +20,7 @@ $soporte3 = new Dvd("Origen", 24, 15, "es,en,fr", "16:9");
 $soporte4 = new Dvd("El Imperio Contraataca", 4, 3, "es,en","16:9");
 
 //alquilo algunos soportes
-$cliente1->alquilar($soporte1);
+$cliente1->alquilar($soporte1)->tieneAlquilado();
 $cliente1->alquilar($soporte2);
 $cliente1->alquilar($soporte3);
 
