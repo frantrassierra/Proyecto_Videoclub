@@ -1,11 +1,16 @@
 <?php
+namespace Dwes\ProyectoVideoclub;
+include "Dvd.php";
+include "CintaVideo.php";
+include "Juego.php";
+const IVA = 21;
 
-abstract class Soporte implements Resumible {
+abstract class Soporte implements Resumible{
     public  $titulo;
     protected  $numero;
     private  $precio;
 
-    private const IVA = 21;
+
 
     public function __construct($titulo,$numero,$precio)
     {
@@ -31,7 +36,7 @@ abstract class Soporte implements Resumible {
     }
     public function getPrecioConIva(){
         $precioConIva=0;
-        $precioConIva=($this->precio*self::IVA/100);
+        $precioConIva=($this->precio*IVA/100);
         return $this->precio+$precioConIva;
     }
     public function muestraResumen(){

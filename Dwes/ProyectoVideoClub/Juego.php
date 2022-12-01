@@ -1,4 +1,6 @@
 <?php
+namespace Dwes\ProyectoVideoclub;
+include "Soporte.php";
 
 class Juego extends Soporte {
     public $consola;
