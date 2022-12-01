@@ -1,6 +1,18 @@
 <?php
+include "autoload.php";
 
-include_once "Videoclub.php"; // No incluimos nada más
+/*include_once("ProyectoVideoClub\Videoclub.php");*/
+
+use \Dwes\ProyectoVideoclub\Videoclub;
+use const Dwes\ProyectoVideoclub\IVA;
+use \Dwes\ProyectoVideoclub\Soporte;
+use \Dwes\ProyectoVideoclub\CintaVideo;
+use \Dwes\ProyectoVideoclub\Dvd;
+use \Dwes\ProyectoVideoclub\Juego;
+use \Dwes\ProyectoVideoclub\Resumible;
+use \Dwes\ProyectoVideoclub\Cliente;
+
+//include_once "Videoclub.php"; // No incluimos nada más
 
 $vc = new Videoclub("Severo 8A");
 

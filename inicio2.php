@@ -1,12 +1,29 @@
 <?php
+include "autoload.php";
+/*
+include_once("ProyectoVideoClub\Soporte.php");
+include_once("ProyectoVideoClub\CintaVideo.php");
+include_once("ProyectoVideoClub\Dvd.php");
+include_once("ProyectoVideoClub\Juego.php");
+include_once("ProyectoVideoClub\Resumible.php");
+include_once("ProyectoVideoClub\Cliente.php");
+*/
 
+/*
+ * include_once "Soporte.php";
+include_once "CintaVideo.php";
+include_once "Dvd.php";
+include_once "Juego.php";
+include_once "Cliente.php";
+ */
 
-include_once "ProyectoVideoClub\Soporte.php";
-include_once "ProyectoVideoClub\CintaVideo.php";
-include_once "ProyectoVideoClub\Dvd.php";
-include_once "ProyectoVideoClub\Juego.php";
-include_once "ProyectoVideoClub\Cliente.php";
-
+use const Dwes\ProyectoVideoclub\IVA;
+use \Dwes\ProyectoVideoclub\Soporte;
+use \Dwes\ProyectoVideoclub\CintaVideo;
+use \Dwes\ProyectoVideoclub\Dvd;
+use \Dwes\ProyectoVideoclub\Juego;
+use \Dwes\ProyectoVideoclub\Resumible;
+use \Dwes\ProyectoVideoclub\Cliente;
 
 
 //instanciamos un par de objetos cliente
@@ -24,7 +41,7 @@ $soporte3 = new Dvd("Origen", 24, 15, "es,en,fr", "16:9");
 $soporte4 = new Dvd("El Imperio Contraataca", 4, 3, "es,en","16:9");
 
 //alquilo algunos soportes
-$cliente1->alquilar($soporte1)->tieneAlquilado();
+$cliente1->alquilar($soporte1);
 $cliente1->alquilar($soporte2);
 $cliente1->alquilar($soporte3);
 
