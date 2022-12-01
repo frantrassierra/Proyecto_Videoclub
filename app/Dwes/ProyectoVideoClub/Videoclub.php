@@ -3,11 +3,25 @@
 namespace Dwes\ProyectoVideoclub;
 
 include_once("Soporte.php");
-include_once("Cliente.php");
 include_once("CintaVideo.php");
 include_once("Dvd.php");
 include_once("Juego.php");
 include_once("Resumible.php");
+include_once("Cliente.php");
+
+
+
+
+/**
+ * include_once("Soporte.php");
+include_once("Cliente.php");
+include_once("CintaVideo.php");
+include_once("Dvd.php");
+include_once("Juego.php");
+
+include_once("Resumible.php");
+ */
+
 
 
 class videoclub{
@@ -95,14 +109,24 @@ class videoclub{
 
 
     function alquilaSocioProducto($numeroCliente,$numeroSoporte){
-        if (is_null($this->socios[$numeroCliente])){
-            echo "No se ha encontrado el cliente";
 
-        }elseif(is_null($this->productos[$numeroSoporte])){
-            echo "No se ha encontrado el soporte";
-        }else{
-            $this->socios[$numeroCliente]-> alquilar($this->productos[$numeroSoporte]);
+        try {
+            if (!is_null($this->socios[$numeroCliente])){
+
+            }
+            elseif(!is_null($this->productos[$numeroSoporte])){
+            }else{
+                $this->socios[$numeroCliente]-> alquilar($this->productos[$numeroSoporte]);
+            }
+
+
+        } catch (ClienteNoEncontradoException $e) {
+            echo "No se ha encontrado el cliente".$e->miFuncion();
+        } catch(SoporteNoEncontradoException $e) {
+            echo "No se ha encontrado el soporte". $e->getMessage();
         }
+
+
         return $this;
 
     }

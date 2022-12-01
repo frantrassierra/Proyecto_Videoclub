@@ -81,51 +81,89 @@ class Cliente{
     }
 
     public function alquilar( $s){
-        if ($this->tieneAlquilado($s)){
-            echo "El soporte ya está alquilado";
-        }
-        elseif ($this->getNumSoportesAlquilados()==$this->maxAlquilerConcurrente){
-            echo "Ha superado el cupo de alquileres";
-        }
-        else {
-            $contador=0;
-            while(!is_null($this->soportesAlquilados[$contador])) {
-                $contador++;  }
+        try {
 
-            $this->soportesAlquilados[$contador]=$s;
+            if (!$this->tieneAlquilado($s)){
+            }
+            if (!$this->getNumSoportesAlquilados()==$this->maxAlquilerConcurrente){
+            }else{
+                $contador=0;
+                while(!is_null($this->soportesAlquilados[$contador])) {
+                    $contador++;  }
 
-            $this->numSoportesAlquilados++;
+                $this->soportesAlquilados[$contador]=$s;
 
+                $this->numSoportesAlquilados++;
+
+            }
+        } catch ( SoporteYaAlquiladoException $e ) {
+            echo "El soporte ya está alquilado " . $e->getMessage();
+        }  catch ( CupoSuperadoException $e ) {
+            echo "Ha superado el cupo de alquileres " . $e->getMessage();
         }
+
+        /*
+        try {
+            if (!$this->tieneAlquilado($s)){
+            }
+        } catch ( SoporteYaAlquiladoException $e ) {
+            echo "El soporte ya está alquilado " . $e->getMessage();
+        }
+
+        try {
+
+            if (!$this->getNumSoportesAlquilados()==$this->maxAlquilerConcurrente){
+            }else{
+                $contador=0;
+                while(!is_null($this->soportesAlquilados[$contador])) {
+                    $contador++;  }
+
+                $this->soportesAlquilados[$contador]=$s;
+
+                $this->numSoportesAlquilados++;
+
+            }
+        } catch ( CupoSuperadoException $e ) {
+            echo "Ha superado el cupo de alquileres " . $e->getMessage();
+        }
+        */
+
         echo "<br />El soporte lo a alquilado: ".$this->nombre. "<br>". $s-> muestraResumen();
         return $this;
     }
 
     public function devolver( int $numSoporte) {
         $existe=false;
-        if($this->getNumSoportesAlquilados()==0)
-        {
+
+
+        try {
+            if(!$this->getNumSoportesAlquilados()==0)
+            {
+            }
+
+
+            for($i=0;$i<$this->maxAlquilerConcurrente;$i++) {
+                if(!is_null($this->soportesAlquilados[$i]))
+                {
+                    if($this->soportesAlquilados[$i]->getNumero()==$numSoporte)
+                    {
+                        echo "<br />El soporte ha sido devuelto por ".$this->nombre;
+
+                        $this->soportesAlquilados[$i]=null;
+                        $this->numSoportesAlquilados--;
+                        $existe=true;
+                        return $existe;
+                    }
+                }
+            }
+
+        } catch (ClienteNoEncontradoException $e) {
             echo "Este cliente no tiene ningun soporte <br>";
             return $existe;
 
+        } catch(SoporteNoEncontradoException $e) {
+            echo  "<br />El soporte no existe"; $e->getMessage();
         }
-
-        for($i=0;$i<$this->maxAlquilerConcurrente;$i++) {
-            if(!is_null($this->soportesAlquilados[$i]))
-            {
-                if($this->soportesAlquilados[$i]->getNumero()==$numSoporte)
-                {
-                    echo "<br />El soporte ha sido devuelto por ".$this->nombre;
-
-                    $this->soportesAlquilados[$i]=null;
-                    $this->numSoportesAlquilados--;
-                    $existe=true;
-                    return $existe;
-                }
-            }
-        }
-
-        echo "<br />El soporte no existe";
 
         return $this;
 
