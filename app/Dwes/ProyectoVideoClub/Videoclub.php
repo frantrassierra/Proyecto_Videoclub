@@ -149,6 +149,28 @@ class videoclub{
         return $this;
 
     }
+    /*
+     * el cual debe recibir un array con los productos a alquilar.
+Antes de alquilarlos, debe comprobar que todos los soportes estén disponibles,
+     de manera que si uno no lo está, no se le alquile ninguno.
+     */
+        function alquilarSocioProductos(int $numSocio, array $numerosProductos){
+            if(!is_null($this->socios[$numSocio])){
+                    if (empty($this->productos) || sizeof($this->productos)==0){
+                        for($i=0;$i<count($numerosProductos);$i++)  {
+                            $numerosProductos[$i]->incluirProducto( $numerosProductos->getNumero());
+                            $numProductosAlquilados++;
+                        }
+                    }
+
+
+            }
+            else{
+                echo "Hay al menos un soporte que no esta disponible";
+            }
+
+
+}
 
 
 
