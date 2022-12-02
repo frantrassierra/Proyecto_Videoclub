@@ -172,6 +172,81 @@ Antes de alquilarlos, debe comprobar que todos los soportes estén disponibles,
 
 }
 
+    public function devolverSocioProducto($numCliente,$numProducto){
+        $cliente=0;
+        $producto=0;
+        $existeC=false;
+        $existeP=false;
+
+        for($i=0;$i<count($this->clientes);$i++)
+        {
+            if(!is_null($this->clientes[$i]))
+            {
+                if($this->clientes[$i]->getNumero()==$numCliente){
+                    $cliente= $i;
+                    $existeC=true;
+                }
+
+            }
+
+            }
+
+        for($i=0;$i<count($this->productos);$i++)
+        {
+            if(!is_null($this->productos[$i]))
+            {
+                if($this->productos[$i]->getNumero()()==$numProducto)
+                    $producto= $i;
+                    $existeP=true;
+
+            }
+        }
+
+        if ($existeC && $existeP){
+            $this->productos[$producto]->setAlquilado(false);
+            $this->clientes[$cliente]->devolver($this->productos[$producto]);
+
+        }
+        else{
+            echo "<br/>No existe cliente o producto";
+
+        }
+        return $this;
+    }
+
+        function devolverSocioProductos(int $numSocio, array $numerosProductos){
+            $cliente=0;
+            $existeC=false;
+
+            for($i=0;$i<count($this->clientes);$i++)
+            {
+                if(!is_null($this->clientes[$i]))
+                {
+                    if($this->clientes[$i]->getNumero()==$numSocio){
+                        $cliente= $i;
+                        $existeC=true;
+                    }
+
+                }
+
+            }
+            if ($existeC){
+                for($i=0;$i<count($numerosProductos);$i++)
+                {
+                    if(!is_null($numerosProductos[$i]))
+                    {
+                        $this->productos[$i]->setAlquilado(false);
+                        $this->clientes[$cliente]->devolver($numerosProductos[$i]->getNumero());
+
+                    }
+            }
+        } else{
+                echo "<br/>No existe cliente o producto";
+
+            }
+            return $this;
+}
+
 
 
 }
