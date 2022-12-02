@@ -71,7 +71,7 @@ class Cliente{
         for ($i=0;$i<$this->maxAlquilerConcurrente;$i++){
 
             if (!is_null($this->soportesAlquilados[$i])){
-                if ($this->soportesAlquilados[$i]->getNumero()== $s->getNumero()){
+                if ($this->soportesAlquilados[$i]->getNumero()== $s->getNumero() || $this->soportesAlquilados[$i]->getAlquilado()){
                     $existe= true;
                 }
             }
@@ -90,11 +90,10 @@ class Cliente{
                 $contador=0;
                 while(!is_null($this->soportesAlquilados[$contador])) {
                     $contador++;  }
-
                 $this->soportesAlquilados[$contador]=$s;
-
+                $this->soportesAlquilados[$contador]->
                 $this->numSoportesAlquilados++;
-
+                $this->soportesAlquilados[$contador]-> setAlquilado(true);
             }
         } catch ( SoporteYaAlquiladoException $e ) {
             echo "El soporte ya está alquilado " . $e->getMessage();
@@ -102,31 +101,6 @@ class Cliente{
             echo "Ha superado el cupo de alquileres " . $e->getMessage();
         }
 
-        /*
-        try {
-            if (!$this->tieneAlquilado($s)){
-            }
-        } catch ( SoporteYaAlquiladoException $e ) {
-            echo "El soporte ya está alquilado " . $e->getMessage();
-        }
-
-        try {
-
-            if (!$this->getNumSoportesAlquilados()==$this->maxAlquilerConcurrente){
-            }else{
-                $contador=0;
-                while(!is_null($this->soportesAlquilados[$contador])) {
-                    $contador++;  }
-
-                $this->soportesAlquilados[$contador]=$s;
-
-                $this->numSoportesAlquilados++;
-
-            }
-        } catch ( CupoSuperadoException $e ) {
-            echo "Ha superado el cupo de alquileres " . $e->getMessage();
-        }
-        */
 
         echo "<br />El soporte lo a alquilado: ".$this->nombre. "<br>". $s-> muestraResumen();
         return $this;
@@ -151,6 +125,7 @@ class Cliente{
 
                         $this->soportesAlquilados[$i]=null;
                         $this->numSoportesAlquilados--;
+                        $this->soportesAlquilados[$i]-> setAlquilado(false);
                         $existe=true;
                         return $existe;
                     }

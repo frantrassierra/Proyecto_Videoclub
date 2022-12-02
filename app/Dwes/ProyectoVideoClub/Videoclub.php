@@ -33,6 +33,8 @@ class videoclub{
 
     private $productos;
     private $socios;
+    private $numProductosAlquilados;
+    private $numTotalAlquileres;
 
 
     public function __construct($nombre)  {
@@ -42,8 +44,25 @@ class videoclub{
         $this->socios=array();
         $this->numProductos=0;
         $this->numSocios=0;
+        $numProductosAlquilados=0;
+        $numTotalAlquileres=0;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getNumProductosAlquilados()
+    {
+        return $this->numProductosAlquilados;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumTotalAlquileres()
+    {
+        return $this->numTotalAlquileres;
+    }
 
     private function incluirProducto( $p)   {
 

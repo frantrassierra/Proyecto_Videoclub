@@ -1,24 +1,38 @@
 <?php
 namespace Dwes\ProyectoVideoclub;
-include "Dvd.php";
-include "CintaVideo.php";
-include "Juego.php";
+include_once "Resumible.php";
 const IVA = 21;
 
 abstract class Soporte implements Resumible{
     public  $titulo;
     protected  $numero;
     private  $precio;
+    public $alquilado;
 
 
 
-    public function __construct($titulo,$numero,$precio)
+    public function __construct($titulo,$numero,$precio,$alquilado=false)
     {
         $this->titulo=$titulo;
         $this->numero=$numero;
         $this->precio=$precio;
+        $this->alquilado=$alquilado;
     }
 
+    /**
+     * @param false|mixed $alquilado
+     */
+    public function setAlquilado($alquilado)
+    {
+        $this->alquilado = $alquilado;
+    }
+    /**
+     * @return false|mixed
+     */
+    public function getAlquilado()
+    {
+        return $this->alquilado;
+    }
     /**
      * @return mixed
      */
